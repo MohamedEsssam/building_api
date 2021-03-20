@@ -1,0 +1,4 @@
+{
+  "databaseConn": "DB_CONN",
+  "authSecret": "CP_AUTH_SECRET"
+}
