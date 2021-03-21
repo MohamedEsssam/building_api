@@ -3,6 +3,13 @@ const Logger = require("./services/LoggerService");
 const logger = new Logger();
 const app = express();
 
+app.use(
+  express.static("public", {
+    index: false,
+    extensions: ["png", "jpg", "jpeg", "pdf"],
+  })
+);
+
 require("./startup/config")();
 require("./startup/cors")(app);
 require("./startup/connectDB");

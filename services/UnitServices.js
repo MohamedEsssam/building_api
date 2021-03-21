@@ -1,4 +1,6 @@
 const _ = require("lodash");
+const Logger = require("./LoggerService");
+const logger = new Logger();
 
 class UnitServices {
   constructor(UnitModel, UnitSchema) {
