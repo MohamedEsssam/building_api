@@ -15,7 +15,7 @@ const fileFilter = (req, file, cb) => {
     file.mimetype === "image/png" ||
     file.mimetype === "image/jpg" ||
     file.mimetype === "image/jpeg" ||
-    file.mimetype === "image/pdf"
+    file.mimetype === "/pdf"
   ) {
     cb(null, true);
   } else {
@@ -25,5 +25,5 @@ const fileFilter = (req, file, cb) => {
 
 module.exports = multer({
   storage: storage,
-  fileFilter: fileFilter,
+  // fileFilter: fileFilter,
 }).single("file");

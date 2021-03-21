@@ -5,8 +5,6 @@ module.exports = function (req, res, next) {
   const uid = req.query.uid;
   const pdf = req.file;
 
-  console.log(req.file, req);
-
   fs.rename(
     path + "/" + pdf.filename,
     path + "/" + uid + "-pdf",

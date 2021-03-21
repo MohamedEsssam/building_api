@@ -1,11 +1,11 @@
 const route = require("express").Router();
-const imageUpload = require("../../middleware/multer");
+const pdfUpload = require("../../middleware/multer");
 const pdfRename = require("../../middleware/pdfRename");
 const authJwt = require("../../middleware/authJwt");
 const uploadPdf = require("../../controllers/pdf/uploadPdf");
 const updatePdf = require("../../controllers/pdf/updatePdf");
 
-route.post("/", authJwt, imageUpload, pdfRename, uploadPdf);
-route.put("/", authJwt, imageUpload, pdfRename, updatePdf);
+route.post("/", authJwt, pdfUpload, pdfRename, uploadPdf);
+route.put("/", authJwt, pdfUpload, pdfRename, updatePdf);
 
 module.exports = route;
