@@ -1,0 +1,665 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "This is all tftesh server Api",
+      "version": "1.0.0",
+      "title": "tftesh project api",
+      "termsOfService": "http://swagger.io/terms/",
+      "contact": {
+        "email": "mohamed.essam.diab97@gmail.com"
+      },
+      "license": {
+        "name": "Apache 2.0",
+        "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+      }
+    },
+    "host": "localhost:9000",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "User",
+            "description": "API for users in the system"
+        },
+        
+        {
+            "name": "Unit",
+            "description": "API for unit in the system"
+        },
+        {
+            "name": "Building",
+            "description": "API for building in the system"
+        }
+    ],
+    "schemes": ["http", "https"],
+    "consumes": ["application/json", "application/xml"],
+    "produces": ["application/json", "application/xml"],
+    "paths": {
+      "/api/user/login": {
+        "post": {
+          "tags": [
+            "User"
+          ],
+          "summary": "Login user.",
+          "description": "Login user.",
+          "operationId": "Login",
+          "parameters": [
+              {
+                "name": "user",
+                "in": "body",
+                "required": true,
+                "description": "Login user.",
+                "schema": {
+                    "$ref": "#/definitions/User"
+                }
+              }
+           ],
+          "responses": {
+            "200": {
+                "description": "User logged in successfully.",
+                "schema": {
+                  "$ref": "#/definitions/User"
+                }
+            },
+            "500": {
+              "description": "Invalid data."
+            },
+            "404": {
+              "description": "Invalid username or password."
+            }
+          }
+        }
+      },
+      "/api/user/register": {
+        "post": {
+          "tags": [
+            "User"
+          ],
+          "summary": "Create new user.",
+          "description": "Create new user.",
+          "operationId": "Register",
+          "parameters": [
+              {
+                "name": "user",
+                "in": "body",
+                "required": true,
+                "description": "Create new user.",
+                "schema": {
+                    "$ref": "#/definitions/NewUser"
+                }
+              }
+           ],
+          "security": [
+            {
+              "JWT": []
+            }
+          ],
+          "responses": {
+            "200": {
+                "description": "User created successfully.",
+                "schema": {
+                  "$ref": "#/definitions/NewUser"
+                }
+            },
+            "500": {
+              "description": "Invalid data."
+            },
+            "409": {
+              "description": "User already exist."
+            }
+          }
+        }
+      },
+      "/api/unit/": {
+        "post": {
+          "tags": [
+            "Unit"
+          ],
+          "summary": "Create new unit.",
+          "description": "Create new unit.",
+          "operationId": "Create unit",
+          "parameters": [
+            {
+              "name": "unit",
+              "in": "body",
+              "required": true,
+              "description": "Create new unit.",
+              "schema": {
+                  "$ref": "#/definitions/NewUnit"
+              }
+            }
+          ],
+          "security": [
+            {
+              "JWT": []
+            }
+          ],
+          "responses": {
+            "200": {
+                "description": "New unit created successfully.",
+                "schema": {
+                  "$ref": "#/definitions/Unit"
+                }
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "Unit"
+          ],
+          "summary": "Get all units.",
+          "description": "Get all units.",
+          "operationId": "GetAll",
+          "security": [
+            {
+              "JWT": []
+            }
+          ],
+          "responses": {
+            "200": {
+                "description": "Get all units successfully.",
+                "schema": {
+                  "$ref": "#/definitions/Units"
+                }
+            }
+          }
+        }
+      },
+      "/api/unit/{unitId}": {
+        "get": {
+          "tags": [
+            "Unit"
+          ],
+          "summary": "Get one unit.",
+          "description": "Get unit by id.",
+          "operationId": "GetOneUnit",
+          "parameters": [
+            {
+              "name": "unitId",
+              "in": "path",
+              "description": "put unit id.",
+              "required": true,
+              "type": "string"
+            }
+         ],
+          "security": [
+            {
+              "JWT": []
+            }
+          ],
+          "responses": {
+            "200": {
+                "description": "Get unit successfully.",
+                "schema": {
+                  "$ref": "#/definitions/Unit"
+                }
+            }
+          }
+        },
+        "put": {
+            "tags": [
+              "Unit"
+            ],
+            "summary": "Update unit.",
+            "description": "Update unit.",
+            "operationId": "Update unit",
+            "parameters": [
+                {
+                    "name": "unitId",
+                    "in": "path",
+                    "description": "put unit id.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "unit",
+                    "in": "body",
+                    "required": true,
+                    "description": "Update unit.",
+                    "schema": {
+                        "$ref": "#/definitions/UpdatedUnit"
+                    }
+                }
+            ],
+            "security": [
+              {
+                "JWT": []
+              }
+            ],
+            "responses": {
+              "200": {
+                  "description": "Unit updated successfully.",
+                  "schema": {
+                    "$ref": "#/definitions/Unit"
+                  }
+              }
+            }
+          },  
+        "delete": {
+          "tags": [
+            "Unit"
+          ],
+          "summary": "Delete one unit.",
+          "description": "Delete unit by id.",
+          "operationId": "DeleteUnit",
+          "parameters": [
+            {
+              "name": "unitId",
+              "in": "path",
+              "description": "put unit id.",
+              "required": true,
+              "type": "string"
+            }
+         ],
+          "security": [
+            {
+              "JWT": []
+            }
+          ],
+          "responses": {
+            "200": {
+                "description": "delete unit successfully.",
+                "schema": {
+                  "$ref": "#/definitions/Unit"
+                }
+            }
+          }
+        }
+      },
+      "/api/building/": {
+        "post": {
+          "tags": [
+            "Building"
+          ],
+          "summary": "Create new building.",
+          "description": "Create new building.",
+          "operationId": "Create building",
+          "parameters": [
+            {
+              "name": "building",
+              "in": "body",
+              "required": true,
+              "description": "Create new building.",
+              "schema": {
+                  "$ref": "#/definitions/NewBuilding"
+              }
+            }
+          ],
+          "security": [
+            {
+              "JWT": []
+            }
+          ],
+          "responses": {
+            "200": {
+                "description": "New building created successfully.",
+                "schema": {
+                  "$ref": "#/definitions/Building"
+                }
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "Building"
+          ],
+          "summary": "Get all buildings.",
+          "description": "Get all buildings.",
+          "operationId": "GetAll",
+          "security": [
+            {
+              "JWT": []
+            }
+          ],
+          "responses": {
+            "200": {
+                "description": "Get all buildings successfully.",
+                "schema": {
+                  "$ref": "#/definitions/Buildings"
+                }
+            }
+          }
+        }
+      },
+      "/api/building/{buildingId}": {
+        "get": {
+          "tags": [
+            "Building"
+          ],
+          "summary": "Get one building.",
+          "description": "Get building by id.",
+          "operationId": "GetOneBuilding",
+          "parameters": [
+            {
+              "name": "buildingId",
+              "in": "path",
+              "description": "put building id.",
+              "required": true,
+              "type": "string"
+            }
+         ],
+          "security": [
+            {
+              "JWT": []
+            }
+          ],
+          "responses": {
+            "200": {
+                "description": "Get building successfully.",
+                "schema": {
+                  "$ref": "#/definitions/Building"
+                }
+            }
+          }
+        },
+        "put": {
+            "tags": [
+              "Building"
+            ],
+            "summary": "Update building.",
+            "description": "Update building.",
+            "operationId": "Update building",
+            "parameters": [
+                {
+                    "name": "buildingId",
+                    "in": "path",
+                    "description": "put building id.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "building",
+                    "in": "body",
+                    "required": true,
+                    "description": "Update building.",
+                    "schema": {
+                        "$ref": "#/definitions/UpdatedBuilding"
+                    }
+                }
+            ],
+            "security": [
+              {
+                "JWT": []
+              }
+            ],
+            "responses": {
+              "200": {
+                  "description": "building updated successfully.",
+                  "schema": {
+                    "$ref": "#/definitions/Building"
+                  }
+              }
+            }
+          },  
+        "delete": {
+          "tags": [
+            "Building"
+          ],
+          "summary": "Delete one building.",
+          "description": "Delete building by id.",
+          "operationId": "DeleteBuilding",
+          "parameters": [
+            {
+              "name": "buildingId",
+              "in": "path",
+              "description": "put building id.",
+              "required": true,
+              "type": "string"
+            }
+         ],
+          "security": [
+            {
+              "JWT": []
+            }
+          ],
+          "responses": {
+            "200": {
+                "description": "delete building successfully.",
+                "schema": {
+                  "$ref": "#/definitions/Building"
+                }
+            }
+          }
+        }
+      }
+    },
+    "securityDefinitions":{
+        "JWT":{
+            "name": "Authorization",
+            "in": "header",
+            "type": "apiKey"
+        }
+    },
+    "definitions": {
+        "User": {
+          "required": ["username", "password"],
+          "properties": {
+            "username": {"type": "string"},
+            "password": {"type": "string"}
+          }
+        },
+        "Units": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "unitId":{"type": "string"},
+              "name":{"type": "string"},
+              "number":{"type": "string"},
+              "area":{"type": "number"},
+              "numberOfBuilding":{"type": "number"},
+              "buildings":{
+                  "type":"array",
+                  "items":{
+                      "type":"object",
+                      "properties":{
+                          "buildingId":{"type":"string"},
+                          "buildingType":{"type": "string", "description": "Building Type",
+                             "enum": ["floor", "building"]}
+                      }
+                  }
+              }
+            }
+          }
+        },
+        "Unit": {
+            "type": "object",
+            "properties": {
+                "unitId":{"type": "string"},
+                "name":{"type": "string"},
+                "number":{"type": "string"},
+                "area":{"type": "number"},
+                "numberOfBuilding":{"type": "number"},
+                "buildings":{
+                    "type":"array",
+                    "items":{
+                        "type":"object",
+                        "properties":{
+                            "buildingId":{"type":"string"},
+                            "buildingType":{"type": "string", "description": "Building Type",
+                               "enum": ["floor", "building"]}
+                        }
+                    }
+                }
+            }
+        },
+        "NewUnit": {
+          "type": "object",
+          "required": [
+              "name",
+              "number",
+              "area",
+              "numberOfBuilding",
+              "buildings"
+          ],
+          "properties": {
+              "name":{"type": "string"},
+              "number":{"type": "string"},
+              "area":{"type": "number"},
+              "numberOfBuilding":{"type": "number"},
+              "buildings":{
+                  "type":"array",
+                   "items":{
+                       "type":"object",
+                       "properties":{
+                           "buildingId":{"type":"string"},
+                           "buildingType":{"type": "string", "description": "Building Type",
+                            "enum": ["floor", "building"]}
+                       }
+                   }
+              }
+            }
+        },
+        "UpdatedUnit": {
+            "type": "object",
+            "required": [
+                "name",
+                "number",
+                "area",
+                "numberOfBuilding",
+                "buildings"
+            ],
+            "properties": {
+                "name":{"type": "string"},
+                "number":{"type": "string"},
+                "area":{"type": "number"},
+                "numberOfBuilding":{"type": "number"},
+                "buildings":{
+                    "type":"array",
+                     "items":{
+                         "type":"object",
+                         "properties":{
+                             "buildingId":{"type":"string"},
+                             "buildingType":{"type": "string", "description": "Building Type",
+                              "enum": ["floor", "building"]}
+                         }
+                     }
+                }
+            }        
+        },
+        "Buildings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "_id": {"type": "string"},
+              "name": {"type": "string"},
+              "code": {"type": "string"},
+              "length": {"type": "number"},
+              "width":{"type": "number"},
+              "height":{"type": "number"},
+              "numberOfFloors":{"type": "number"},
+              "constrictiveArea":{"type": "number"},
+              "totalArea":{"type": "number"},
+              "interfaceSpace":{"type": "number"},
+              "dateCreated":{"type": "string"},
+              "buildType":{"type": "string"},
+              "lastMaintenanceDate":{"type": "string"},
+              "lastMaintenanceCost":{"type": "number"},
+              "license":{"type": "boolean"},
+              "record140":{"type": "boolean"},
+              "originatorJob":{"type": "string"}
+            }
+          }
+        },
+        "Building": {
+            "type": "object",
+            "properties": {
+              "_id": {"type": "string"},
+              "name": {"type": "string"},
+              "code": {"type": "string"},
+              "length": {"type": "number"},
+              "width":{"type": "number"},
+              "height":{"type": "number"},
+              "numberOfFloors":{"type": "number"},
+              "constrictiveArea":{"type": "number"},
+              "totalArea":{"type": "number"},
+              "interfaceSpace":{"type": "number"},
+              "dateCreated":{"type": "string"},
+              "buildType":{"type": "string"},
+              "lastMaintenanceDate":{"type": "string"},
+              "lastMaintenanceCost":{"type": "number"},
+              "license":{"type": "boolean"},
+              "record140":{"type": "boolean"},
+              "originatorJob":{"type": "string"}
+            }
+        },
+        "NewBuilding": {
+          "type": "object",
+          "required": [
+            "name",
+            "code",
+            "length",
+            "width",
+            "height",
+            "numberOfFloors",
+            "constrictiveArea",
+            "totalArea",
+            "interfaceSpace",
+            "dateCreated",
+            "buildType",
+            "lastMaintenanceDate",
+            "lastMaintenanceCost",
+            "license",
+            "record140",
+            "originatorJob"
+          ],
+          "properties": {
+            "name": {"type": "string"},
+            "code": {"type": "string"},
+            "length": {"type": "number"},
+            "width":{"type": "number"},
+            "height":{"type": "number"},
+            "numberOfFloors":{"type": "number"},
+            "constrictiveArea":{"type": "number"},
+            "totalArea":{"type": "number"},
+            "interfaceSpace":{"type": "number"},
+            "dateCreated":{"type": "string"},
+            "buildType":{"type": "string"},
+            "lastMaintenanceDate":{"type": "string"},
+            "lastMaintenanceCost":{"type": "number"},
+            "license":{"type": "boolean"},
+            "record140":{"type": "boolean"},
+            "originatorJob":{"type": "string"}
+            }
+        },
+        "UpdatedBuilding": {
+            "type": "object",
+            "required": [
+              "name",
+              "code",
+              "length",
+              "width",
+              "height",
+              "numberOfFloors",
+              "constrictiveArea",
+              "totalArea",
+              "interfaceSpace",
+              "dateCreated",
+              "buildType",
+              "lastMaintenanceDate",
+              "lastMaintenanceCost",
+              "license",
+              "record140",
+              "originatorJob"
+            ],
+            "properties": {
+              "name": {"type": "string"},
+              "code": {"type": "string"},
+              "length": {"type": "number"},
+              "width":{"type": "number"},
+              "height":{"type": "number"},
+              "numberOfFloors":{"type": "number"},
+              "constrictiveArea":{"type": "number"},
+              "totalArea":{"type": "number"},
+              "interfaceSpace":{"type": "number"},
+              "dateCreated":{"type": "string"},
+              "buildType":{"type": "string"},
+              "lastMaintenanceDate":{"type": "string"},
+              "lastMaintenanceCost":{"type": "number"},
+              "license":{"type": "boolean"},
+              "record140":{"type": "boolean"},
+              "originatorJob":{"type": "string"}
+            }        
+        }
+    }
+  }

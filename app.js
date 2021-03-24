@@ -10,6 +10,7 @@ app.use(
   })
 );
 
+require("./startup/swagger")(app);
 require("./startup/config")();
 require("./startup/cors")(app);
 require("./startup/connectDB");
